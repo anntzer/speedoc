@@ -19,5 +19,5 @@ if __name__ == "__main__":
         ],
         py_modules=["_speedoc"],
         entry_points={"console_scripts": ["speedoc = _speedoc:main"]},
-        install_requires=["sphinx>=1.3"],
+        install_requires=["sphinx>=1.5"],  # sphinx-doc/sphinx#1911.
     )

@@ -81,17 +81,24 @@ can be obtained with
     ]
     with TemporaryDirectory() as tmpdir:
         Path(tmpdir, "conf.py").write_text(r"""\
+# Force autosummary to be loaded before -Dextensions=..., both to allow
+# swapping out just napoleon, and to work around the fact that numpydoc fails
+# to self-resolve the dependency on autosummary.
+import sys
+__overrides = sys._getframe(2).f_locals["overrides"]
+__required_extensions = "sphinx.ext.autosummary"
+__overrides["extensions"] = (
+    __required_extensions + "," + __overrides["extensions"]
+    if __overrides.get("extensions") else __required_extensions)
+
 # No description, no authors, section 3 ("library calls").
 man_pages = [("contents", "{}", "\n", "", "3")]
 """.format(args.obj))
-        extensions = ["sphinx.ext.autodoc",
-                      "sphinx.ext.autosummary",
-                      "sphinx.ext.napoleon"]
         Path(tmpdir, "contents.rst").write_text(
             template.format(mod=mod.__name__, obj=args.obj))
         subprocess.run(
             [sys.executable, "-msphinx", ".", "build", "-bman", "-q",
-             "-Dextensions=" + ",".join(extensions)] + rest,
+             "-Dextensions=sphinx.ext.napoleon"] + rest,
             cwd=tmpdir, check=True)
         subprocess.run(["man", "build/{}.3".format(args.obj)], cwd=tmpdir)
 
