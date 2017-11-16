@@ -18,6 +18,7 @@ if __name__ == "__main__":
             "Topic :: Documentation",
         ],
         py_modules=["_speedoc"],
+        package_dir={"": "lib"},
         entry_points={"console_scripts": ["speedoc = _speedoc:main"]},
         install_requires=["sphinx>=1.5"],  # sphinx-doc/sphinx#1911.
     )
