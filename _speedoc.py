@@ -93,6 +93,16 @@ __overrides["extensions"] = (
 
 # No description, no authors, section 3 ("library calls").
 man_pages = [("contents", "{}", "\n", "", "3")]
+
+def man_visit_math(self, node):
+    from docutils import nodes
+    child, = node.children
+    self.body.append("$ {{}} $".format(child.replace("\\", "\\\\")))
+    raise nodes.SkipNode
+
+def setup(app):
+    from sphinx.ext.mathbase import math, displaymath
+    app.add_node(math, override=True, man=(man_visit_math, None))
 """.format(args.obj))
         Path(tmpdir, "contents.rst").write_text(
             template.format(mod=mod.__name__, obj=args.obj))
