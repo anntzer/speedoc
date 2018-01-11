@@ -1,4 +1,4 @@
-"""speedoc - sphinx meets pydoc.
+"""sphinx meets pydoc.
 """
 
 from argparse import ArgumentParser, RawDescriptionHelpFormatter
@@ -81,6 +81,8 @@ can be obtained with
     ]
     with TemporaryDirectory() as tmpdir:
         Path(tmpdir, "conf.py").write_text(r"""\
+version = {version!r}
+
 # Force autosummary to be loaded before -Dextensions=..., both to allow
 # swapping out just napoleon, and to work around the fact that numpydoc fails
 # to self-resolve the dependency on autosummary.
@@ -92,7 +94,7 @@ __overrides["extensions"] = (
     if __overrides.get("extensions") else __required_extensions)
 
 # No description, no authors, section 3 ("library calls").
-man_pages = [("contents", "{}", "\n", "", "3")]
+man_pages = [("contents", "{name}", "", "", "3")]
 
 def man_visit_math(self, node):
     from docutils import nodes
@@ -103,7 +105,7 @@ def man_visit_math(self, node):
 def setup(app):
     from sphinx.ext.mathbase import math, displaymath
     app.add_node(math, override=True, man=(man_visit_math, None))
-""".format(args.obj))
+""".format(name=args.obj, version=getattr(obj, "__version__", "")))
         Path(tmpdir, "contents.rst").write_text(
             template.format(mod=mod.__name__, obj=args.obj))
         subprocess.run(
