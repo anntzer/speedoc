@@ -1,5 +1,5 @@
-"""sphinx meets pydoc.
-"""
+#!/usr/bin/env python
+"""sphinx meets pydoc."""
 
 from argparse import ArgumentParser, RawDescriptionHelpFormatter
 import builtins
@@ -10,6 +10,18 @@ from pathlib import Path
 import subprocess
 import sys
 import types
+
+try:
+    import setuptools_scm
+    __version__ = setuptools_scm.get_version(  # xref setup.py
+        root="../..", relative_to=__file__,
+        version_scheme="post-release", local_scheme="node-and-date")
+except (ImportError, LookupError):
+    try:
+        import pkg_resources
+        __version__ = pkg_resources.get_distribution("speedoc").version
+    except pkg_resources.DistributionNotFound:
+        pass
 
 
 _templates = {
@@ -57,6 +69,8 @@ can be obtained with
 
     %(prog)s -Dextensions=sphinx.ext.autodoc,sphinx.ext.autosummary,numpydoc ...
 """)
+    parser.add_argument("-v", "--version", action="version",
+                        version="%(prog)s {}".format(__version__))
     parser.add_argument("obj", help="object to document")
     args, rest = parser.parse_known_args(argv)
     if not all(opt.startswith("-") for opt in rest):
@@ -113,7 +127,3 @@ def setup(app):
              "-Dextensions=sphinx.ext.napoleon"] + rest,
             cwd=tmpdir, check=True)
         subprocess.run(["man", "build/{}.3".format(args.obj)], cwd=tmpdir)
-
-
-if __name__ == "__main__":
-    main()
