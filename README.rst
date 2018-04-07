@@ -36,6 +36,13 @@ numpydoc_ instead of sphinx.ext.napoleon_, call
 
    speedoc -Dextensions=numpydoc obj.to.document
 
+Options to ``man`` can be passed by setting the (standard) ``MANOPT``
+environment variable.  For example, justification can be disabled with
+
+.. code:: sh
+
+    MANOPT=--nj speedoc ...
+
 .. _numpydoc: https://numpydoc.readthedocs.io
 .. _sphinx.ext.autosummary: http://www.sphinx-doc.org/ext/autosummary.html
 .. _sphinx.ext.napoleon: http://www.sphinx-doc.org/ext/napoleon.html

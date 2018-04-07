@@ -64,10 +64,15 @@ def main(argv=None):
     parser = ArgumentParser(
         formatter_class=RawDescriptionHelpFormatter,
         epilog="""\
-Unknown flags are passed to `python -msphinx`.  For example, numpydoc rendering
-can be obtained with
+Unknown flags are passed to ``python -msphinx``.  For example, numpydoc
+rendering can be obtained with ::
 
-    %(prog)s -Dextensions=sphinx.ext.autodoc,sphinx.ext.autosummary,numpydoc ...
+    %(prog)s -Dextensions=numpydoc ...
+
+Options to ``man`` can be passed by setting the (standard) ``MANOPT``
+environment variable.  For example, justification can be disabled with ::
+
+    MANOPT=--nj %(prog)s ...
 """)
     parser.add_argument("-v", "--version", action="version",
                         version="%(prog)s {}".format(__version__))
@@ -97,9 +102,8 @@ can be obtained with
         Path(tmpdir, "conf.py").write_text(r"""\
 version = {version!r}
 
-# Force autosummary to be loaded before -Dextensions=..., both to allow
-# swapping out just napoleon, and to work around the fact that numpydoc fails
-# to self-resolve the dependency on autosummary.
+# Force autosummary to be loaded before -Dextensions=..., to allow swapping out
+# just napoleon.
 import sys
 __overrides = sys._getframe(2).f_locals["overrides"]
 __required_extensions = "sphinx.ext.autosummary"
