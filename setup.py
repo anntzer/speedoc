@@ -4,6 +4,7 @@ from setuptools import setup
 setup(
     name="speedoc",
     description="sphinx meets pydoc.",
+    long_description=open("README.rst", encoding="utf-8").read(),
     url="https://github.com/anntzer/speedoc",
     author="Antony Lee",
     license="MIT",
