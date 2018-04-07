@@ -91,12 +91,12 @@ environment variable.  For example, justification can be disabled with ::
             obj = getattr(obj, parts[j])
 
     template = _templates[
-        "module" if isinstance(obj, types.ModuleType)
-        else "exception"
-            if isinstance(obj, type) and issubclass(obj, Exception)
-        else "class" if isinstance(obj, type)
-        else "function" if isinstance(obj, Callable)
-        else "data"  # no support for automethod, autoattribute.
+        "module" if isinstance(obj, types.ModuleType) else
+        "exception" if (isinstance(obj, type)
+                        and issubclass(obj, Exception)) else
+        "class" if isinstance(obj, type) else
+        "function" if isinstance(obj, Callable) else
+        "data"  # no support for automethod, autoattribute.
     ]
     with TemporaryDirectory() as tmpdir:
         Path(tmpdir, "conf.py").write_text(r"""\
