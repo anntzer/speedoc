@@ -131,3 +131,7 @@ def setup(app):
              "-Dextensions=sphinx.ext.napoleon"] + rest,
             cwd=tmpdir, check=True)
         subprocess.run(["man", "build/{}.3".format(args.obj)], cwd=tmpdir)
+
+
+if __name__ == "__main__":
+    main()
