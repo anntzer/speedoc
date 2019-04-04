@@ -28,13 +28,15 @@ invoked as
    # -bman: build a man page; -q: quietly
    python -msphinx $tmpdir1 $tmpdir2 -bman -q -Dextensions=sphinx.ext.napoleon
 
-with a minimal ``conf.py`` that forces sphinx.ext.autosummary_ to be loaded and
-sets ``man_pages = [("contents", obj_name, "\n", "", "3")]``.  To use, e.g.,
-numpydoc_ instead of sphinx.ext.napoleon_, call
+with a minimal ``conf.py`` that sets ``man_pages = [("contents", obj_name,
+"\n", "", "3")]``.  To use, e.g., numpydoc_ instead of sphinx.ext.napoleon_,
+call
 
 .. code:: sh
 
-   speedoc -Dextensions=numpydoc obj.to.document
+   speedoc -Dextensions=sphinx.ext.autodoc,numpydoc obj.to.document
+
+(With numpydoc master, it is not necessary anymore to explicitly load autodoc.)
 
 Options to ``man`` can be passed by setting the (standard) ``MANOPT``
 environment variable.  For example, justification can be disabled with

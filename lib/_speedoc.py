@@ -102,15 +102,6 @@ environment variable.  For example, justification can be disabled with ::
         Path(tmpdir, "conf.py").write_text(r"""\
 version = {version!r}
 
-# Force autosummary to be loaded before -Dextensions=..., to allow swapping out
-# just napoleon.
-import sys
-__overrides = sys._getframe(2).f_locals["overrides"]
-__required_extensions = "sphinx.ext.autosummary"
-__overrides["extensions"] = (
-    __required_extensions + "," + __overrides["extensions"]
-    if __overrides.get("extensions") else __required_extensions)
-
 # No description, no authors, section 3 ("library calls").
 man_pages = [("contents", "{name}", "", "", "3")]
 
