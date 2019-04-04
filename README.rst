@@ -12,6 +12,10 @@ Installation
 
    python -mpip install git+https://github.com/anntzer/speedoc
 
+Tests can be run with pytest_.
+
+.. _pytest: https://docs.pytest.org
+
 Usage
 -----
 
