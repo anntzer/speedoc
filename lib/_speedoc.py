@@ -102,8 +102,10 @@ environment variable.  For example, justification can be disabled with ::
         Path(tmpdir, "conf.py").write_text(r"""\
 version = {version!r}
 
+master_doc = "index"  # sphinx<2 compat.
+
 # No description, no authors, section 3 ("library calls").
-man_pages = [("contents", "{name}", "", "", "3")]
+man_pages = [("index", "{name}", "", "", "3")]
 
 def man_visit_math(self, node):
     from docutils import nodes
@@ -115,7 +117,7 @@ def setup(app):
     from sphinx.ext.mathbase import math, displaymath
     app.add_node(math, override=True, man=(man_visit_math, None))
 """.format(name=args.obj, version=getattr(obj, "__version__", "")))
-        Path(tmpdir, "contents.rst").write_text(
+        Path(tmpdir, "index.rst").write_text(
             template.format(mod=mod.__name__, obj=args.obj))
         subprocess.run(
             [sys.executable, "-msphinx", ".", "build", "-bman", "-q",
