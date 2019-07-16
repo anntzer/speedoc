@@ -40,7 +40,7 @@ call
 
    speedoc -Dextensions=sphinx.ext.autodoc,numpydoc obj.to.document
 
-(With numpydoc master, it is not necessary anymore to explicitly load autodoc.)
+(With numpydoc≥0.9, it is not necessary anymore to explicitly load autodoc.)
 
 Options to ``man`` can be passed by setting the (standard) ``MANOPT``
 environment variable.  For example, justification can be disabled with
