@@ -1,4 +1,4 @@
 [run]
 branch = true
-source = speedoc
+source = _speedoc
 omit = **/_version.py
