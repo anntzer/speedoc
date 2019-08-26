@@ -19,12 +19,12 @@ setup(
     ],
     py_modules=["_speedoc"],
     package_dir={"": "lib"},
-    python_requires=">=3",
+    python_requires=">=3.5",
     setup_requires=["setuptools_scm"],
     use_scm_version=lambda: {  # xref pypi2pkgbuild.py
         "version_scheme": "post-release",
         "local_scheme": "node-and-date",
     },
-    install_requires=["sphinx>=1.5"],  # sphinx-doc/sphinx#1911.
+    install_requires=["sphinx>=1.7"],  # sphinx-doc/sphinx#4233.
     entry_points={"console_scripts": ["speedoc = _speedoc:main"]},
 )
