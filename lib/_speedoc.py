@@ -81,6 +81,7 @@ environment variable.  For example, justification can be disabled with ::
     if not all(opt.startswith("-") for opt in rest):
         parser.error("only one object can be documented at a time")
 
+    # Can't use pydoc.locate because we need `mod` for `.. currentmodule::`.
     parts = args.obj.split(".")
     mod = obj = builtins
     try:
