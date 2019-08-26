@@ -1,6 +1,11 @@
 speedoc – sphinx meets pydoc
 ============================
 
+|PyPI|
+
+.. |PyPI| image:: https://img.shields.io/pypi/v/speedoc.svg
+   :target: https://pypi.python.org/pypi/speedoc
+
 Turn docstrings into man pages using Sphinx_, and view the result with ``man``.
 
 .. _Sphinx: http://www.sphinx-doc.org
