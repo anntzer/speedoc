@@ -1,15 +1,10 @@
 speedoc – sphinx meets pydoc
 ============================
 
-|PyPI| |Travis|
+|PyPI|
 
 .. |PyPI| image:: https://img.shields.io/pypi/v/speedoc.svg
    :target: https://pypi.python.org/pypi/speedoc
-.. |Travis|
-   image:: https://travis-ci.com/anntzer/speedoc.svg?branch=master
-   :target: https://travis-ci.com/anntzer/speedoc
-
-.. codecov seems broken.
 
 Turn docstrings into man pages using Sphinx_, and view the result with ``man``.
 
