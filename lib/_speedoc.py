@@ -109,8 +109,14 @@ def man_visit_math(self, node):
     raise nodes.SkipNode
 
 def setup(app):
-    from sphinx.ext.mathbase import math, displaymath
-    app.add_node(math, override=True, man=(man_visit_math, None))
+    try:
+        from sphinx.ext.mathbase import math as sphinx_math
+    except ImportError:
+        pass
+    else:
+        app.add_node(sphinx_math, override=True, man=(man_visit_math, None))
+    from docutils.nodes import math as docutils_math
+    app.add_node(docutils_math, override=True, man=(man_visit_math, None))
 """.format(name=args.obj, version=getattr(obj, "__version__", "")))
         Path(tmpdir, "index.rst").write_text(
             template.format(mod=mod.__name__, obj=args.obj))
