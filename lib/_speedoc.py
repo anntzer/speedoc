@@ -12,16 +12,10 @@ import sys
 import types
 
 try:
-    import setuptools_scm
-    __version__ = setuptools_scm.get_version(  # xref setup.py
-        root="../..", relative_to=__file__,
-        version_scheme="post-release", local_scheme="node-and-date")
-except (ImportError, LookupError):
-    try:
-        import pkg_resources
-        __version__ = pkg_resources.get_distribution("speedoc").version
-    except pkg_resources.DistributionNotFound:
-        pass
+    import pkg_resources
+    __version__ = pkg_resources.get_distribution("speedoc").version
+except (ImportError, pkg_resources.DistributionNotFound):
+    __version__ = "0+unknown"
 
 
 _templates = {

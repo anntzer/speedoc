@@ -21,7 +21,7 @@ setup(
     package_dir={"": "lib"},
     python_requires=">=3.5",
     setup_requires=["setuptools_scm"],
-    use_scm_version=lambda: {  # xref pypi2pkgbuild.py
+    use_scm_version=lambda: {
         "version_scheme": "post-release",
         "local_scheme": "node-and-date",
     },
