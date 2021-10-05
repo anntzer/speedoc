@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.5, 3.9]
+        python-version: ["3.5", "3.10"]
     steps:
     - uses: actions/checkout@v2
     - uses: actions/setup-python@v2
@@ -19,7 +19,7 @@ jobs:
         case '${{ matrix.python-version }}' in
         3.5)
           pip install sphinx==1.7;;
-        3.9)
+        3.10)
           ;;
         *)
           exit 1;;
