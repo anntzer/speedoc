@@ -1,3 +1,6 @@
+# Note that this relies on pytest (instead of unittest) to also redirect
+# stdout to a non-tty, which prevents man from calling a pager.
+
 import subprocess
 import sys
 
